@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 
 
 def byteCafeUrl():
-    today = datetime.today() - timedelta(days = 18)
+    today = datetime.today()
     weekday = today.weekday()
     last_monday = today - timedelta(days=weekday)
     monday_month = str(last_monday.month)
