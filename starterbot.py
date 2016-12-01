@@ -4,7 +4,7 @@ from slackclient import SlackClient
 
 BOT_ID = os.environ.get("BOT_ID")
 AT_BOT = "<@" + str(BOT_ID) + ">"
-EXAMPLE_COMMAND = "do"
+EXAMPLE_COMMAND = "whats for lunch"
 
 slack_client = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
 
