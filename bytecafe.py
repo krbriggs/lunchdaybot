@@ -6,6 +6,7 @@ def convertHtml(html):
    html = html.replace('&nbsp;', ' ')   
    html = html.replace('<p>', '')
    html = html.replace('</p>', '')
+   html = html.replace('\t', '')
    return html
 
 def getFoodDay(weekday, content):
@@ -17,7 +18,6 @@ def getFoodDay(weekday, content):
    food = food.lstrip('<')
    return convertHtml(food)
    
-
 def getContent():
    #page = requests.get('http://dining.guckenheimer.com/clients/npcholdings/fss/fss.nsf/weeklyMenuLaunch/9W4S24~11-28-2016/%24file/cafehome.htm')
    page = requests.get(byteCafeUrl())

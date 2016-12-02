@@ -3,6 +3,7 @@ import time
 import datetime
 from slackclient import SlackClient
 from bytecafe import *
+from specialtys import getSoups
 
 BOT_ID = os.environ.get("BOT_ID")
 AT_BOT = "<@" + str(BOT_ID) + ">"
@@ -24,7 +25,11 @@ def handle_command(command, channel):
       "* command with numbers, delimited by spaces."
 
    if command.startswith(EXAMPLE_COMMAND1):
-         response = 'Byte Cafe: ' + getMeal(getCurrentDay())
+         response = 'Byte Cafe:\n\t' + getMeal(getCurrentDay())
+         response += '\nSpecialty\'s Soups:'
+         soups = getSoups()
+         for soup in soups:
+            response += '\n\t' + soup
 
    if command.startswith(EXAMPLE_COMMAND2):
          response = 'Byte Cafe:\n' + getByteWeek()
