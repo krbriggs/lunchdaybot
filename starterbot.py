@@ -7,6 +7,8 @@ from specialtys import getSoups
 from FoodTruckMafia import foodTruckMafia
 from mrpickles import getPickleDay
 from mrpickles import getPickleWeek
+from rando_lunch import lunch
+
 
 BOT_ID = os.environ.get("BOT_ID")
 AT_BOT = "<@" + str(BOT_ID) + ">"
@@ -15,6 +17,8 @@ EXAMPLE_COMMAND2 = "week"
 EXAMPLE_COMMAND3 = "cheesecake"
 EXAMPLE_COMMAND4 = "pickle soup"
 EXAMPLE_COMMAND5 = "IKEA"
+EXAMPLE_COMMAND6 = "random"
+
 
 week = ['Monday', 'Tuesday', 'Wednesday', 'Thrusday', 'Friday', 'Saturday', 'Sunday']
 
@@ -28,7 +32,7 @@ def getCurrentDay():
 def handle_command(command, channel):
    #recieves commands directed at bot and determine if valid
    response = "Not sure what you mean. These are the supported commands:\n"
-   response += '\t' + EXAMPLE_COMMAND1 + '\n \t' + EXAMPLE_COMMAND2 + '\n \t' + EXAMPLE_COMMAND3 + '\n \t' + EXAMPLE_COMMAND4 + '\n'
+   response += '\t' + EXAMPLE_COMMAND1 + '\n \t' + EXAMPLE_COMMAND2 + '\n \t' + EXAMPLE_COMMAND3 + '\n \t' + EXAMPLE_COMMAND4 + '\n \t' + EXAMPLE_COMMAND6 + '\n'
 
    if command.startswith(EXAMPLE_COMMAND1):
          response = '*Byte Cafe:*\n\t' + getMeal(getCurrentDay())
@@ -56,6 +60,10 @@ def handle_command(command, channel):
 
    if command.startswith(EXAMPLE_COMMAND5):
          response = "Swedish Meatballs"
+
+   if command.startswith(EXAMPLE_COMMAND6):
+      
+      response = lunch()
 
    slack_client.api_call("chat.postMessage", channel=channel, text=response,
       as_user=True)
