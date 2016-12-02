@@ -2,13 +2,14 @@ import os
 import time
 import datetime
 from slackclient import SlackClient
-from bytecafe import getMeal
+from bytecafe import *
 
 BOT_ID = os.environ.get("BOT_ID")
 AT_BOT = "<@" + str(BOT_ID) + ">"
-EXAMPLE_COMMAND = "lunch"
+EXAMPLE_COMMAND1 = "today"
+EXAMPLE_COMMAND2 = "week"
 
-week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+week = ['Monday', 'Tuesday', 'Wednesday', 'Thrusday', 'Friday', 'Saturday', 'Sunday']
 
 slack_client = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
 
@@ -22,9 +23,7 @@ def handle_command(command, channel):
    response = "Not sure what you mean. Use the *" + EXAMPLE_COMMAND + \
       "* command with numbers, delimited by spaces."
 
-   if command.startswith(EXAMPLE_COMMAND):
-         print getCurrentDay()
-         print getMeal(getCurrentDay())
+   if command.startswith(EXAMPLE_COMMAND1):
          response = getMeal(getCurrentDay())
 
    slack_client.api_call("chat.postMessage", channel=channel, text=response,

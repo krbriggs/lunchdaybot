@@ -2,6 +2,9 @@
 import requests
 from ByteCafeUrl import byteCafeUrl
 
+def convertHtml(html):
+   return html.replace('&nbsp;', ' ')   
+
 def getFoodDay(weekday, content):
    startIndex = content.find(weekday + ':')
    food = content[startIndex:]
@@ -9,7 +12,7 @@ def getFoodDay(weekday, content):
 
    food = food[:endIndex]
    food = food.lstrip('<')
-   return food
+   return convertHtml(food)
    
 
 def getContent():
@@ -19,6 +22,7 @@ def getContent():
 
 def getMeal(day):
    content = getContent()
+
    food = getFoodDay(day, content)
    return food
 
