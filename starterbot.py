@@ -5,12 +5,15 @@ from slackclient import SlackClient
 from bytecafe import *
 from specialtys import getSoups
 from FoodTruckMafia import foodTruckMafia
+from mrpickles import getPickleDay
+from mrpickles import getPickleWeek
 
 BOT_ID = os.environ.get("BOT_ID")
 AT_BOT = "<@" + str(BOT_ID) + ">"
 EXAMPLE_COMMAND1 = "today"
 EXAMPLE_COMMAND2 = "week"
 EXAMPLE_COMMAND3 = "cheesecake"
+EXAMPLE_COMMAND4 = "pickle soup"
 
 week = ['Monday', 'Tuesday', 'Wednesday', 'Thrusday', 'Friday', 'Saturday', 'Sunday']
 
@@ -42,6 +45,13 @@ def handle_command(command, channel):
    if command.startswith(EXAMPLE_COMMAND3):
          response = '*Cheesecake Factory Cheesecakes:*\n'
          response += cheese()
+
+   if command.startswith(EXAMPLE_COMMAND4):
+         response = '*Mr. Pickles Soups:*\n'
+         response += "Today's Soup:\n "
+         response += '\t' + '- ' + getPickleDay('Friday')
+         response += "\nThis Week's Soups:\n"
+         response += getPickleWeek()
 
    slack_client.api_call("chat.postMessage", channel=channel, text=response,
       as_user=True)
