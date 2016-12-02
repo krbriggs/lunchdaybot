@@ -19,9 +19,8 @@ def cheese():
 
 
 def main():
-   content = getContent()
-   #cheese(content)
-   #cheesy()
+   
+   #print cheese()
    return 'cheesy'
    
 
