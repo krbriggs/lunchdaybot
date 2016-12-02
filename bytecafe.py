@@ -30,7 +30,6 @@ def getByteWeek():
    endIndex = content.find('Friday:') + content[content.find('Friday:'):].find('<')
    food = content[startIndex:endIndex]
    foodweek = convertHtml(food).splitlines()
-   print foodweek
    food = ""
    for day in foodweek:
        food = food + "\t" + day + "\n"
