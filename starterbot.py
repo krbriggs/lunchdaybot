@@ -26,8 +26,8 @@ def getCurrentDay():
 
 def handle_command(command, channel):
    #recieves commands directed at bot and determine if valid
-   response = "Not sure what you mean. Use the *" + EXAMPLE_COMMAND1 + \
-      "* command with numbers, delimited by spaces."
+   response = "Not sure what you mean. These are the supported commands:\n"
+   response += '\t' + EXAMPLE_COMMAND1 + '\n \t' + EXAMPLE_COMMAND2 + '\n \t' + EXAMPLE_COMMAND3 + '\n \t' + EXAMPLE_COMMAND4 + '\n'
 
    if command.startswith(EXAMPLE_COMMAND1):
          response = '*Byte Cafe:*\n\t' + getMeal(getCurrentDay())
