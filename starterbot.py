@@ -6,12 +6,19 @@ from bytecafe import *
 from specialtys import getSoups
 from FoodTruckMafia import foodTruckMafia
 from ThreeSheets import threeSheets
+from mrpickles import getPickleDay, getPickleWeek
+from rando_lunch import lunch
+from cheesecake import cheese
 
 BOT_ID = os.environ.get("BOT_ID")
 AT_BOT = "<@" + str(BOT_ID) + ">"
 EXAMPLE_COMMAND1 = "today"
 EXAMPLE_COMMAND2 = "week"
 ON_TAP_COMMAND = "on tap"
+EXAMPLE_COMMAND3 = "cheesecake"
+EXAMPLE_COMMAND4 = "pickle soup"
+EXAMPLE_COMMAND5 = "IKEA"
+EXAMPLE_COMMAND6 = "random"
 
 week = ['Monday', 'Tuesday', 'Wednesday', 'Thrusday', 'Friday', 'Saturday', 'Sunday']
 
@@ -24,8 +31,10 @@ def getCurrentDay():
 
 def handle_command(command, channel):
    #recieves commands directed at bot and determine if valid
-   response = "Not sure what you mean. Use the *" + EXAMPLE_COMMAND1 + \
-      "* command with numbers, delimited by spaces."
+   response = "Not sure what you mean. These are the supported commands:\n"
+   response += '\t' + EXAMPLE_COMMAND1 + '\n \t' + EXAMPLE_COMMAND2 + '\n \t' + \
+                EXAMPLE_COMMAND3 + '\n \t' + EXAMPLE_COMMAND4 + '\n \t' + \
+                EXAMPLE_COMMAND6 + '\n \t' + ON_TAP_COMMAND + '\n'
 
    if command.startswith(EXAMPLE_COMMAND1):
          response = '*Byte Cafe:*\n\t' + getMeal(getCurrentDay())
@@ -42,6 +51,23 @@ def handle_command(command, channel):
 
    if command.startswith(ON_TAP_COMMAND):
          response = '*3 Sheets*\n' + threeSheets()
+
+   if command.startswith(EXAMPLE_COMMAND3):
+         response = '*Cheesecake Factory Cheesecakes:*\n'
+         response += cheese()
+
+   if command.startswith(EXAMPLE_COMMAND4):
+         response = '*Mr. Pickles Soups:*\n'
+         response += "Today's Soup:\n "
+         response += '\t' + '- ' + getPickleDay('Friday')
+         response += "\nThis Week's Soups:\n"
+         response += getPickleWeek()
+
+   if command.startswith(EXAMPLE_COMMAND5):
+         response = "Swedish Meatballs"
+
+   if command.startswith(EXAMPLE_COMMAND6):
+      response = lunch()
 
    slack_client.api_call("chat.postMessage", channel=channel, text=response,
       as_user=True)
