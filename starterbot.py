@@ -14,6 +14,7 @@ EXAMPLE_COMMAND1 = "today"
 EXAMPLE_COMMAND2 = "week"
 EXAMPLE_COMMAND3 = "cheesecake"
 EXAMPLE_COMMAND4 = "pickle soup"
+EXAMPLE_COMMAND5 = "IKEA"
 
 week = ['Monday', 'Tuesday', 'Wednesday', 'Thrusday', 'Friday', 'Saturday', 'Sunday']
 
@@ -52,6 +53,9 @@ def handle_command(command, channel):
          response += '\t' + '- ' + getPickleDay('Friday')
          response += "\nThis Week's Soups:\n"
          response += getPickleWeek()
+
+   if command.startswith(EXAMPLE_COMMAND5):
+         response = "Swedish Meatballs"
 
    slack_client.api_call("chat.postMessage", channel=channel, text=response,
       as_user=True)
