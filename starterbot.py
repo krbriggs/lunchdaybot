@@ -5,11 +5,13 @@ from slackclient import SlackClient
 from bytecafe import *
 from specialtys import getSoups
 from FoodTruckMafia import foodTruckMafia
+from ThreeSheets import threeSheets
 
 BOT_ID = os.environ.get("BOT_ID")
 AT_BOT = "<@" + str(BOT_ID) + ">"
 EXAMPLE_COMMAND1 = "today"
 EXAMPLE_COMMAND2 = "week"
+ON_TAP_COMMAND = "on tap"
 
 week = ['Monday', 'Tuesday', 'Wednesday', 'Thrusday', 'Friday', 'Saturday', 'Sunday']
 
@@ -37,6 +39,9 @@ def handle_command(command, channel):
    if command.startswith(EXAMPLE_COMMAND2):
          response = '*Byte Cafe:*\n' + getByteWeek()
          response += '\n*Food Truck Mafia:*\n' + foodTruckMafia()
+
+   if command.startswith(ON_TAP_COMMAND):
+         response = '*3 Sheets*\n' + threeSheets()
 
    slack_client.api_call("chat.postMessage", channel=channel, text=response,
       as_user=True)
