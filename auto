@@ -1,0 +1,5 @@
+source starterbot/bin/activate
+export SLACK_BOT_TOKEN=xoxb-112189330359-wedYO0GWwKapxGiqQfkRqkYY
+#python print_bot_id.py
+export BOT_ID=U3A5K9QAK
+python starterbot.py

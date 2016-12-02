@@ -3,7 +3,7 @@ import requests
 from ByteCafeUrl import byteCafeUrl
 
 def convertHtml(html):
-   html = html.replace('&nbsp;', ' ')   
+   html = html.replace('&nbsp;', ' ')
    html = html.replace('<p>', '')
    html = html.replace('</p>', '')
    html = html.replace('\t', '')
@@ -17,7 +17,7 @@ def getFoodDay(weekday, content):
    food = food[:endIndex]
    food = food.lstrip('<')
    return convertHtml(food)
-   
+
 def getContent():
    #page = requests.get('http://dining.guckenheimer.com/clients/npcholdings/fss/fss.nsf/weeklyMenuLaunch/9W4S24~11-28-2016/%24file/cafehome.htm')
    page = requests.get(byteCafeUrl())
@@ -29,7 +29,12 @@ def getByteWeek():
 
    endIndex = content.find('Friday:') + content[content.find('Friday:'):].find('<')
    food = content[startIndex:endIndex]
-   return convertHtml(food)
+   foodweek = convertHtml(food).splitlines()
+   print foodweek
+   food = ""
+   for day in foodweek:
+       food = food + "\t" + day + "\n"
+   return food[:-1]
 
 def getMeal(day):
    content = getContent()

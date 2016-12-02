@@ -25,14 +25,14 @@ def handle_command(command, channel):
       "* command with numbers, delimited by spaces."
 
    if command.startswith(EXAMPLE_COMMAND1):
-         response = 'Byte Cafe:\n\t' + getMeal(getCurrentDay())
-         response += '\nSpecialty\'s Soups:'
+         response = '*Byte Cafe:*\n\t' + getMeal(getCurrentDay())
+         response += '\n*Specialty\'s Soups:*'
          soups = getSoups()
          for soup in soups:
             response += '\n\t' + soup
 
    if command.startswith(EXAMPLE_COMMAND2):
-         response = 'Byte Cafe:\n' + getByteWeek()
+         response = '*Byte Cafe:*\n' + getByteWeek()
 
    slack_client.api_call("chat.postMessage", channel=channel, text=response,
       as_user=True)
@@ -40,7 +40,7 @@ def handle_command(command, channel):
 def parse_slack_output(slack_rtm_output):
    #return None unless message is for bot
    output_list = slack_rtm_output
-   
+
    if output_list and len(output_list) > 0:
       for output in output_list:
          if output and 'text' in output and AT_BOT in output['text']:
@@ -57,7 +57,7 @@ if __name__ == "__main__":
       print("StarterBot connected and running")
       while True:
          command, channel = parse_slack_output(slack_client.rtm_read())
-         
+
          if command and channel:
             handle_command(command, channel)
          time.sleep(READ_WEBSOCKET_DELAY)
