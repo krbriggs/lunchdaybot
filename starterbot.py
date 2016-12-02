@@ -4,6 +4,7 @@ import datetime
 from slackclient import SlackClient
 from bytecafe import *
 from specialtys import getSoups
+from FoodTruckMafia import foodTruckMafia
 
 BOT_ID = os.environ.get("BOT_ID")
 AT_BOT = "<@" + str(BOT_ID) + ">"
@@ -30,9 +31,12 @@ def handle_command(command, channel):
          soups = getSoups()
          for soup in soups:
             response += '\n\t' + soup
+         if getCurrentDay() == 'Friday':
+            response += '\n*Food Truck Mafia:*\n' + foodTruckMafia()
 
    if command.startswith(EXAMPLE_COMMAND2):
          response = '*Byte Cafe:*\n' + getByteWeek()
+         response += '\n*Food Truck Mafia:*\n' + foodTruckMafia()
 
    slack_client.api_call("chat.postMessage", channel=channel, text=response,
       as_user=True)
