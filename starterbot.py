@@ -20,11 +20,14 @@ def getCurrentDay():
 
 def handle_command(command, channel):
    #recieves commands directed at bot and determine if valid
-   response = "Not sure what you mean. Use the *" + EXAMPLE_COMMAND + \
+   response = "Not sure what you mean. Use the *" + EXAMPLE_COMMAND1 + \
       "* command with numbers, delimited by spaces."
 
    if command.startswith(EXAMPLE_COMMAND1):
-         response = getMeal(getCurrentDay())
+         response = 'Byte Cafe: ' + getMeal(getCurrentDay())
+
+   if command.startswith(EXAMPLE_COMMAND2):
+         response = 'Byte Cafe:\n' + getByteWeek()
 
    slack_client.api_call("chat.postMessage", channel=channel, text=response,
       as_user=True)
