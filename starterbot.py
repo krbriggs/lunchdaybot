@@ -10,6 +10,7 @@ BOT_ID = os.environ.get("BOT_ID")
 AT_BOT = "<@" + str(BOT_ID) + ">"
 EXAMPLE_COMMAND1 = "today"
 EXAMPLE_COMMAND2 = "week"
+EXAMPLE_COMMAND3 = "cheesecake"
 
 week = ['Monday', 'Tuesday', 'Wednesday', 'Thrusday', 'Friday', 'Saturday', 'Sunday']
 
@@ -37,6 +38,10 @@ def handle_command(command, channel):
    if command.startswith(EXAMPLE_COMMAND2):
          response = '*Byte Cafe:*\n' + getByteWeek()
          response += '\n*Food Truck Mafia:*\n' + foodTruckMafia()
+
+   if command.startswith(EXAMPLE_COMMAND3):
+         response = '*Cheesecake Factory Cheesecakes:*\n'
+         response += cheese()
 
    slack_client.api_call("chat.postMessage", channel=channel, text=response,
       as_user=True)
