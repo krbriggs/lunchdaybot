@@ -1,12 +1,21 @@
 import os
 import time
+import datetime
 from slackclient import SlackClient
+from bytecafe import getMeal
 
 BOT_ID = os.environ.get("BOT_ID")
 AT_BOT = "<@" + str(BOT_ID) + ">"
-EXAMPLE_COMMAND = "whats for lunch"
+EXAMPLE_COMMAND = "lunch"
+
+week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 
 slack_client = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
+
+def getCurrentDay():
+   date = datetime.date.today()
+   day = date.weekday()
+   return week[day]
 
 def handle_command(command, channel):
    #recieves commands directed at bot and determine if valid
@@ -14,7 +23,9 @@ def handle_command(command, channel):
       "* command with numbers, delimited by spaces."
 
    if command.startswith(EXAMPLE_COMMAND):
-         response = "Sure... Bend Over"
+         print getCurrentDay()
+         print getMeal(getCurrentDay())
+         response = getMeal(getCurrentDay())
 
    slack_client.api_call("chat.postMessage", channel=channel, text=response,
       as_user=True)

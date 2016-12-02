@@ -1,6 +1,6 @@
-from lxml import html
+#from lxml import html
 import requests
-
+from ByteCafeUrl import byteCafeUrl
 
 def getFoodDay(weekday, content):
    startIndex = content.find(weekday + ':')
@@ -12,13 +12,18 @@ def getFoodDay(weekday, content):
    return food
    
 
-def getUrl():
-   page = requests.get('http://dining.guckenheimer.com/clients/npcholdings/fss/fss.nsf/weeklyMenuLaunch/9W4S24~11-28-2016/%24file/cafehome.htm')
+def getContent():
+   #page = requests.get('http://dining.guckenheimer.com/clients/npcholdings/fss/fss.nsf/weeklyMenuLaunch/9W4S24~11-28-2016/%24file/cafehome.htm')
+   page = requests.get(byteCafeUrl())
    return page.content
 
+def getMeal(day):
+   content = getContent()
+   food = getFoodDay(day, content)
+   return food
 
 def main():
-   content = getUrl()
+   content = getContent()
    food = getFoodDay('Monday', content)
    print food
 
