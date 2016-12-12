@@ -3,7 +3,6 @@ import string
 from bs4 import BeautifulSoup
 
 
-
 def threeSheets():
     page = requests.get("http://www.threesheetscraftbeer.com/on-tap/")
     html = page.content
@@ -35,3 +34,12 @@ def threeSheets():
 
     #liness = [line.rstrip() for line in lines]
     return lines_real
+
+
+def main():
+   
+   print threeSheets()
+   
+
+if __name__ == "__main__":
+   main()

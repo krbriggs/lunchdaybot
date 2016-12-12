@@ -7,6 +7,8 @@ def convertHtml(html):
    html = html.replace('<p>', '')
    html = html.replace('</p>', '')
    html = html.replace('\t', '')
+   html = html.replace('<strong>', '*')
+   html = html.replace('</strong>', '*')
    return html
 
 def getFoodDay(weekday, content):
